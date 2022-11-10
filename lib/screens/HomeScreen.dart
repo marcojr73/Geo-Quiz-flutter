@@ -47,9 +47,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         BottomNavigationBarItem(
           backgroundColor: Theme.of(context).colorScheme.primary,
-          icon: const Icon(
-            Icons.public,
-          ),
+          icon: Image.asset("assets/images/logo.png",
+                  width: 50),
           label: "Games" ,
         ),
         BottomNavigationBarItem(

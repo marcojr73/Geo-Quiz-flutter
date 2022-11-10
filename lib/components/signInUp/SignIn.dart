@@ -51,7 +51,6 @@ class _SignInState extends State<SignIn> {
     });
     if(response != 200) showError();
     Navigator.of(context).pushNamed(AppRouters.home);
-    print(response);
   }
 
   @override

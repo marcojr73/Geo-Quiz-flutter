@@ -23,7 +23,6 @@ class SignUp extends StatelessWidget {
     if(response["error"] != null) {
       print("deu ruim aq");
     }
-    // print(response);
   }
 
   @override

@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-Future <List<dynamic>> getRankingApi() async {
+Future <Map<String, dynamic>> getRankingApi() async {
   const baseUrl = "https://geo-quiz-api.herokuapp.com";
   final prefs = await SharedPreferences.getInstance();
   final String? token = prefs.getString("token");
@@ -21,7 +21,7 @@ Future <List<dynamic>> getRankingApi() async {
     } else {
       Map<String, dynamic> map = jsonDecode(response.body);
       List<dynamic> list = map["weekScore"];
-      return list;
+      return map;
     }
   } catch (e) {
     throw(e);

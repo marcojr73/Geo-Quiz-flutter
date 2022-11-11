@@ -67,6 +67,7 @@ flutter:
     - assets/images/mapCountry.jpeg
     - assets/images/flags.jpeg
     - assets/images/mapcity.jpeg
+    - assets/images/profile.jpeg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

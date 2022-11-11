@@ -10,9 +10,9 @@ class Ranking extends StatefulWidget {
 }
 
 class _RankingState extends State<Ranking> {
-  Future<List<dynamic>> getRanking() async {
-    final rank = await getRankingApi();
-    print(rank);
+  Future <List<dynamic>> getRanking() async {
+    final data = await getRankingApi();
+    List<dynamic> rank = data["weekScore"];
     return rank;
   }
 
@@ -67,6 +67,7 @@ class _RankingState extends State<Ranking> {
                 }
                 if (snapshot.hasError) {
                   print(snapshot.error.toString());
+                  return const CircularProgressIndicator();
                 }
                 return Container();
               }),

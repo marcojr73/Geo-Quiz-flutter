@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:geo_quiz_mobile/screens/GameScreen.dart';
+import 'package:geo_quiz_mobile/utils/AppRouters.dart';
 
 class GameLevels extends StatelessWidget {
   final String image;
-  const GameLevels({super.key, required this.image});
+  final String type;
+  const GameLevels({super.key, required this.image, required this.type});
+
+  void PopQuestions(BuildContext context, String type, String level){
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) {
+          return GameScreen(type: type, level: level,);
+        }
+        )
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +39,7 @@ class GameLevels extends StatelessWidget {
                     height: 30,
                     width: 100,
                     child: ElevatedButton(
-                        onPressed: () {}, child: const Text("Easy")),
+                        onPressed: () => PopQuestions(context, type, "easy"), child: const Text("Easy")),
                   ),
                 ),
                 Padding(
@@ -35,7 +48,7 @@ class GameLevels extends StatelessWidget {
                     height: 30,
                     width: 100,
                     child: ElevatedButton(
-                        onPressed: () {}, child: const Text("Medium")),
+                        onPressed: () => PopQuestions(context, type, "medium"), child: const Text("Medium")),
                   ),
                 ),
                 Padding(
@@ -44,7 +57,7 @@ class GameLevels extends StatelessWidget {
                     height: 30,
                     width: 100,
                     child: ElevatedButton(
-                        onPressed: () {}, child: const Text("Hard")),
+                        onPressed: () => PopQuestions(context, type, "hard"), child: const Text("Hard")),
                   ),
                 ),
               ],

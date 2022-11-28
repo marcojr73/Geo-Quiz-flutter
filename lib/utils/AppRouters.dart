@@ -5,4 +5,5 @@ class AppRouters {
   static const home = "/home";
   static const profile = "/home/profile";
   static const ranking = "/home/ranking";
+  static const game = "/home/game";
 }

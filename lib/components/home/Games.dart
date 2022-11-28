@@ -17,9 +17,9 @@ class Games extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: const [
-                GameLevels(image: "assets/images/flags.jpeg"),
-                GameLevels(image: "assets/images/mapcity.jpeg"),
-                GameLevels(image: "assets/images/mapCountry.jpeg")
+                GameLevels(type: "flags", image: "assets/images/flags.jpeg"),
+                GameLevels(type: "capitals", image: "assets/images/mapcity.jpeg"),
+                GameLevels(type: "territories", image: "assets/images/mapCountry.jpeg")
               ],
             ),
           ),

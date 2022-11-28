@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geo_quiz_mobile/screens/GameScreen.dart';
 import 'package:geo_quiz_mobile/screens/HomeScreen.dart';
 import 'package:geo_quiz_mobile/screens/TabsLogin.dart';
 import 'package:geo_quiz_mobile/utils/AppRouters.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         ),
       routes: {
         AppRouters.signUp: (ctx) => const TabsLogin(),
-        AppRouters.home: (ctx) => const HomeScreen()
+        AppRouters.home: (ctx) => const HomeScreen(),
       },
     );
   }

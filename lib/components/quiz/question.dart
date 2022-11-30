@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:geo_quiz_mobile/components/quiz/OptionButton.dart';
 
-class Question extends StatelessWidget {
+class Question extends StatefulWidget {
   final String name;
   final List options;
   final String title;
+  final int quizId;
+  final List scoreBoard;
+  final void Function() setIndex;
+  final void Function(dynamic) setScoreBoard;
+
   const Question(
       {super.key,
       required this.name,
       required this.options,
-      required this.title});
+      required this.title,
+      required this.setIndex,
+      required this.quizId, 
+      required this.setScoreBoard, 
+      required this.scoreBoard});
 
+  @override
+  State<Question> createState() => _QuestionState();
+}
+
+class _QuestionState extends State<Question> {
   @override
   Widget build(BuildContext context) {
     return ListView(children: [
@@ -22,18 +36,60 @@ class Question extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.1,
           ),
-          Text("What is the $title", style: const TextStyle(fontSize: 30)),
-          Text(name, style: const TextStyle(fontSize: 50)),
+          Text(
+              "What is the ${widget.title.substring(0, widget.title.length - 1)}",
+              style: const TextStyle(fontSize: 30)),
+          Text(widget.name, style: const TextStyle(fontSize: 50)),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.1,
           ),
           Column(
             children: [
-              OptionButton(option: options[0]),
-              OptionButton(option: options[1]),
-              OptionButton(option: options[2]),
-              OptionButton(option: options[3]),
-              OptionButton(option: options[4])
+              OptionButton(
+                  option: widget.options[0],
+                  setIndex: widget.setIndex,
+                  type: widget.title,
+                  setScoreBoard: widget.setScoreBoard,
+                  quizId: widget.quizId),
+              OptionButton(
+                  option: widget.options[1],
+                  setIndex: widget.setIndex,
+                  type: widget.title,
+                  setScoreBoard: widget.setScoreBoard,
+                  quizId: widget.quizId),
+              OptionButton(
+                  option: widget.options[2],
+                  setIndex: widget.setIndex,
+                  type: widget.title,
+                  setScoreBoard: widget.setScoreBoard,
+                  quizId: widget.quizId),
+              OptionButton(
+                  option: widget.options[3],
+                  setIndex: widget.setIndex,
+                  type: widget.title,
+                  setScoreBoard: widget.setScoreBoard,
+                  quizId: widget.quizId),
+              OptionButton(
+                  option: widget.options[4],
+                  setIndex: widget.setIndex,
+                  type: widget.title,
+                  setScoreBoard: widget.setScoreBoard,
+                  quizId: widget.quizId)
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              for (var i = 0; i < widget.scoreBoard.length; i++)
+                widget.scoreBoard[i] == true
+                    ? const Icon(
+                        Icons.check,
+                        color: Colors.green,
+                      )
+                    : const Icon(
+                        Icons.close,
+                        color: Colors.red,
+                      ),
             ],
           )
         ]),

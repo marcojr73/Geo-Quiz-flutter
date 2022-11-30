@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geo_quiz_mobile/api/quizApi.dart';
+import 'package:geo_quiz_mobile/components/quiz/Questions.dart';
 import 'package:geo_quiz_mobile/components/quiz/question.dart';
 
 class GameScreen extends StatefulWidget {
@@ -14,19 +15,10 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
 
-  int index = 0;
-
-  void setIndex(){
-    setState(() {
-      index++;
-    });
-  }
-
   Future<List<dynamic>> getQuiz() async {
-      final List<dynamic> data = await getQuizApi(widget.type, widget.level);
-      print(data);
-      return data;
-    }
+    final List<dynamic> data = await getQuizApi(widget.type, widget.level);
+    return data;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +37,12 @@ class _GameScreenState extends State<GameScreen> {
                   print(snapshot.error.toString());
                   return const CircularProgressIndicator();
                 }
-                if (snapshot.connectionState == ConnectionState.done) { 
+                if (snapshot.connectionState == ConnectionState.done) {
                   final e = snapshot.data;
-                  return Question(title: widget.type.substring(0, widget.type.length - 1), name: e![index]["name"], options: e[index]["options"],);
+                  return Questions(type: widget.type, quiz: e);
                 }
-                return const Text("lets go my little children");
-            })),
+                return Container();
+              })),
         ));
   }
 }

@@ -4,6 +4,7 @@ import 'package:geo_quiz_mobile/api/authApi.dart';
 import 'package:geo_quiz_mobile/components/signInUp/Header.dart';
 import 'package:geo_quiz_mobile/components/signInUp/InputForm.dart';
 import 'package:geo_quiz_mobile/utils/AppRouters.dart';
+import 'package:geo_quiz_mobile/utils/showError.dart';
 import 'package:http/http.dart' as http;
 
 class SignIn extends StatefulWidget {
@@ -21,26 +22,9 @@ class _SignInState extends State<SignIn> {
   bool isLoading = false;
   bool isError = false;
 
-  void showError() {
-    showDialog(
-       context: context,
-       builder: (BuildContext context) {
-         return AlertDialog(
-          title: const Text("email or password is incorrect"),
-          actions: <Widget>[
-            ElevatedButton(
-              child: const Text("Fechar"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-         );
-    },
-   );
-}
+  
 
-  void submit() async {
+  void submit(context) async {
     setState(() {
       isLoading = true;
     });
@@ -49,8 +33,8 @@ class _SignInState extends State<SignIn> {
     setState(() {
       isLoading = false;
     });
-    if(response != 200) showError();
-    Navigator.of(context).pushNamed(AppRouters.home);
+    if(response != 200) showError(context, "email or password is incorrect");
+    if(response == 200) Navigator.of(context).pushNamed(AppRouters.home);
   }
 
   @override
@@ -82,7 +66,7 @@ class _SignInState extends State<SignIn> {
                     SizedBox(
                       width: 310,
                       child: ElevatedButton(
-                        onPressed: submit,
+                        onPressed: () => submit(context),
                         style: ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll<Color>(
                               Theme.of(context).colorScheme.primary),

@@ -4,25 +4,41 @@ import 'package:flutter/material.dart';
 import 'package:geo_quiz_mobile/api/authApi.dart';
 import 'package:geo_quiz_mobile/components/signInUp/Header.dart';
 import 'package:geo_quiz_mobile/components/signInUp/InputForm.dart';
+import 'package:geo_quiz_mobile/utils/AppRouters.dart';
+import 'package:geo_quiz_mobile/utils/showError.dart';
 import 'package:http/http.dart' as http;
 
-class SignUp extends StatelessWidget {
-  SignUp({super.key});
+class SignUp extends StatefulWidget {
+  const SignUp({super.key});
 
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
   final formKey = GlobalKey<FormState>();
+
   final formData = <String, String>{};
 
-  void submit() async {
+  bool isLoading = false;
+
+  void submit(context) async {
     formKey.currentState?.save();
+
+    setState(() {
+      isLoading = true;
+    });
     final response = await signUpApi(
       formData["name"], 
       formData["email"], 
       formData["password"], 
       formData["confirmPassword"]
     );
-    if(response["error"] != null) {
-      print("deu ruim aq");
-    }
+    setState(() {
+      isLoading = false;
+    });
+    if(response != 201) showError(context, "you did not fill in all the fields correctly");
+    if(response == 201) showError(context, "Created");
   }
 
   @override
@@ -50,10 +66,13 @@ class SignUp extends StatelessWidget {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.02,
                     ),
+                    isLoading ?
+                    const CircularProgressIndicator()
+                    :
                     SizedBox(
                       width: 310,
                       child: ElevatedButton(
-                        onPressed: submit,
+                        onPressed: () => submit(context),
                         style: ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll<Color>(
                               Theme.of(context).colorScheme.primary),

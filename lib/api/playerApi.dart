@@ -5,9 +5,8 @@ import 'package:geo_quiz_mobile/models/RankingModel.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 Future <Map<String, dynamic>> getRankingApi() async {
-  const baseUrl = "https://geo-quiz-api.herokuapp.com";
+  const baseUrl = "https://geo-quiz-api.onrender.com";
   final prefs = await SharedPreferences.getInstance();
   final String? token = prefs.getString("token");
   try {

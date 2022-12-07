@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geo_quiz_mobile/components/quiz/OptionButton.dart';
+import 'package:geo_quiz_mobile/components/quiz/ScoreBoard.dart';
 
 class Question extends StatefulWidget {
   final String name;
@@ -27,73 +28,54 @@ class Question extends StatefulWidget {
 class _QuestionState extends State<Question> {
   @override
   Widget build(BuildContext context) {
-    return ListView(children: [
-      Container(
-        color: Theme.of(context).colorScheme.secondary,
-        width: MediaQuery.of(context).size.width * 1,
-        height: MediaQuery.of(context).size.height * 1,
-        child: Column(children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          ),
-          Text(
-              "What is the ${widget.title.substring(0, widget.title.length - 1)}",
-              style: const TextStyle(fontSize: 30)),
-          Text(widget.name, style: const TextStyle(fontSize: 50)),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          ),
-          Column(
-            children: [
-              OptionButton(
-                  option: widget.options[0],
-                  setIndex: widget.setIndex,
-                  type: widget.title,
-                  setScoreBoard: widget.setScoreBoard,
-                  quizId: widget.quizId),
-              OptionButton(
-                  option: widget.options[1],
-                  setIndex: widget.setIndex,
-                  type: widget.title,
-                  setScoreBoard: widget.setScoreBoard,
-                  quizId: widget.quizId),
-              OptionButton(
-                  option: widget.options[2],
-                  setIndex: widget.setIndex,
-                  type: widget.title,
-                  setScoreBoard: widget.setScoreBoard,
-                  quizId: widget.quizId),
-              OptionButton(
-                  option: widget.options[3],
-                  setIndex: widget.setIndex,
-                  type: widget.title,
-                  setScoreBoard: widget.setScoreBoard,
-                  quizId: widget.quizId),
-              OptionButton(
-                  option: widget.options[4],
-                  setIndex: widget.setIndex,
-                  type: widget.title,
-                  setScoreBoard: widget.setScoreBoard,
-                  quizId: widget.quizId)
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              for (var i = 0; i < widget.scoreBoard.length; i++)
-                widget.scoreBoard[i] == true
-                    ? const Icon(
-                        Icons.check,
-                        color: Colors.green,
-                      )
-                    : const Icon(
-                        Icons.close,
-                        color: Colors.red,
-                      ),
-            ],
-          )
-        ]),
-      ),
-    ]);
+    return Container(
+      color: Theme.of(context).colorScheme.secondary,
+      width: MediaQuery.of(context).size.width * 1,
+      height: MediaQuery.of(context).size.height * 1,
+      child: Column(children: [
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.1,
+        ),
+        Text(widget.name, style: const TextStyle(fontSize: 50)),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.1,
+        ),
+        Column(
+          children: [
+            OptionButton(
+                option: widget.options[0],
+                setIndex: widget.setIndex,
+                type: widget.title,
+                setScoreBoard: widget.setScoreBoard,
+                quizId: widget.quizId),
+            OptionButton(
+                option: widget.options[1],
+                setIndex: widget.setIndex,
+                type: widget.title,
+                setScoreBoard: widget.setScoreBoard,
+                quizId: widget.quizId),
+            OptionButton(
+                option: widget.options[2],
+                setIndex: widget.setIndex,
+                type: widget.title,
+                setScoreBoard: widget.setScoreBoard,
+                quizId: widget.quizId),
+            OptionButton(
+                option: widget.options[3],
+                setIndex: widget.setIndex,
+                type: widget.title,
+                setScoreBoard: widget.setScoreBoard,
+                quizId: widget.quizId),
+            OptionButton(
+                option: widget.options[4],
+                setIndex: widget.setIndex,
+                type: widget.title,
+                setScoreBoard: widget.setScoreBoard,
+                quizId: widget.quizId)
+          ],
+        ),
+        ScoreBoard(scoreBoard: widget.scoreBoard)
+      ]),
+    );
   }
 }

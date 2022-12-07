@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geo_quiz_mobile/components/quiz/FinalScore.dart';
+import 'package:geo_quiz_mobile/components/quiz/ScoreBoard.dart';
 import 'package:geo_quiz_mobile/components/quiz/question.dart';
 
 class Questions extends StatefulWidget {
@@ -38,16 +39,16 @@ class _QuestionsState extends State<Questions> {
   Widget build(BuildContext context) {
     return index == 10
         ? FinalScore(
-            scoreBoard: scoreBoard,
-          )
+          scoreBoard: scoreBoard,
+        )
         : Question(
-            setIndex: setIndex,
-            title: widget.type,
-            name: widget.quiz![index]["name"],
-            options: widget.quiz![index]["options"],
-            quizId: widget.quiz![index]["id"],
-            scoreBoard: scoreBoard,
-            setScoreBoard: setScoreBoard,
-          );
+          setIndex: setIndex,
+          title: widget.type,
+          name: widget.quiz![index]["name"],
+          options: widget.quiz![index]["options"],
+          quizId: widget.quiz![index]["id"],
+          scoreBoard: scoreBoard,
+          setScoreBoard: setScoreBoard,
+        );
   }
 }

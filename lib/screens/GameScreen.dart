@@ -24,7 +24,7 @@ class _GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("${widget.type}, ${widget.level}"),
+          title: Text("what is the ${widget.type.substring(0, widget.type.length - 1)}"),
         ),
         body: Center(
           child: FutureBuilder(

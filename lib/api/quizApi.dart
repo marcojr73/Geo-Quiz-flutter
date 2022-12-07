@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future <List<dynamic>> getQuizApi(String type, String level) async {
-  const baseUrl = "https://geo-quiz-api.herokuapp.com";
+  const baseUrl = "https://geo-quiz-api.onrender.com";
   final prefs = await SharedPreferences.getInstance();
   final String? token = prefs.getString("token");
   try {
@@ -26,7 +26,7 @@ Future <List<dynamic>> getQuizApi(String type, String level) async {
 }
 
 Future validateQuestionApi(String type, String answer, int quizId) async {
-  const baseUrl = "https://geo-quiz-api.herokuapp.com";
+  const baseUrl = "https://geo-quiz-api.onrender.com";
   final prefs = await SharedPreferences.getInstance();
   final String? token = prefs.getString("token");
   try {

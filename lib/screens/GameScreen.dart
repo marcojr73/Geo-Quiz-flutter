@@ -14,7 +14,6 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-
   Future<List<dynamic>> getQuiz() async {
     final List<dynamic> data = await getQuizApi(widget.type, widget.level);
     return data;
@@ -22,27 +21,38 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var quiz = getQuiz();
     return Scaffold(
         appBar: AppBar(
-          title: Text("what is the ${widget.type.substring(0, widget.type.length - 1)}"),
+          title: widget.type == "territories"
+              ? const Text("What is the territory ?")
+              : Text(
+                  "what is the ${widget.type.substring(0, widget.type.length - 1)} ?"),
         ),
         body: Center(
-          child: FutureBuilder(
-              future: getQuiz(),
-              builder: ((context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                }
-                if (snapshot.hasError) {
-                  print(snapshot.error.toString());
-                  return const CircularProgressIndicator();
-                }
-                if (snapshot.connectionState == ConnectionState.done) {
-                  final e = snapshot.data;
-                  return Questions(type: widget.type, quiz: e);
-                }
-                return Container();
-              })),
+          child: Container(
+            color: Theme.of(context).colorScheme.secondary,
+            width: MediaQuery.of(context).size.width * 1,
+            height: MediaQuery.of(context).size.height * 1,
+            child: FutureBuilder(
+                future: getQuiz(),
+                builder: ((context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator()
+                    ); 
+                  }
+                  if (snapshot.hasError) {
+                    print(snapshot.error.toString());
+                    return const CircularProgressIndicator();
+                  }
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    final e = snapshot.data;
+                    return Questions(type: widget.type, quiz: e);
+                  }
+                  return Container();
+                })),
+          ),
         ));
   }
 }

@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  int selectedScreenIndex = 0;
+  int selectedScreenIndex = 1;
   final List<Map<String, Object>> screens = [
     {"title": "Ranking", "screen": const Ranking()},
     {"title": "Games", "screen": const Games()},

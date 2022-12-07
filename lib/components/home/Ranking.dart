@@ -19,10 +19,10 @@ class _RankingState extends State<Ranking> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
       color: Theme.of(context).colorScheme.secondary,
       child: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Icon(
               Icons.emoji_events,
@@ -40,29 +40,31 @@ class _RankingState extends State<Ranking> {
                   return const CircularProgressIndicator();
                 }
                 if (snapshot.connectionState == ConnectionState.done) {
-                  return SizedBox(
-                    width: MediaQuery.of(context).size.height * 1,
-                    height: MediaQuery.of(context).size.height * 0.5,
-                    child: ListView.builder(
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: ((context, index) {
-                          final e = snapshot.data![index];
-                          return Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  e["name"],
-                                  style: const TextStyle(fontSize: 20),
-                                ),
-                                const SizedBox(
-                                  width: 30,
-                                ),
-                                Text(
-                                  "${e["weekScore"]}  pontos",
-                                  style: const TextStyle(fontSize: 20),
-                                )
-                              ]);
-                        })),
+                  return SingleChildScrollView(
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.height * 1,
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      child: ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: ((context, index) {
+                            final e = snapshot.data![index];
+                            return Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    e["name"],
+                                    style: const TextStyle(fontSize: 20),
+                                  ),
+                                  const SizedBox(
+                                    width: 30,
+                                  ),
+                                  Text(
+                                    "${e["weekScore"]}  pontos",
+                                    style: const TextStyle(fontSize: 20),
+                                  )
+                                ]);
+                          })),
+                    ),
                   );
                 }
                 if (snapshot.hasError) {

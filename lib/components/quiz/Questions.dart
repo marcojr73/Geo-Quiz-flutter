@@ -43,7 +43,7 @@ class _QuestionsState extends State<Questions> {
         )
         : Question(
           setIndex: setIndex,
-          title: widget.type,
+          type: widget.type,
           name: widget.quiz![index]["name"],
           options: widget.quiz![index]["options"],
           quizId: widget.quiz![index]["id"],

@@ -16,54 +16,56 @@ class Profile extends StatelessWidget {
     return Container(
       color: Theme.of(context).colorScheme.secondary,
       child: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(100)),
-            child: Image.asset(
-              "assets/images/profile.jpeg",
+          child: Container(
+        margin: const EdgeInsets.fromLTRB(0, 100, 0, 0),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(100)),
+              child: Image.asset(
+                "assets/images/profile.jpeg",
+              ),
             ),
-          ),
-          FutureBuilder(
-            future: getUser(),
-            builder: ((context, snapshot) {
-              final e = snapshot.data;
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
-              }
-              if (snapshot.connectionState == ConnectionState.done) {
-                return Column(
-                  children: [
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Text(
-                      e!["name"],
-                      style: const TextStyle(fontSize: 30),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "Hits ${e["hits"]}",
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                    Text(
-                      "Mistakes ${e["mistakes"]}",
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                  ],
-                );
-              }
-              if (snapshot.hasError) {
-                print(snapshot.error.toString());
-                return const CircularProgressIndicator();
-              }
-              return Container();
-            }),
-          )
-        ],
+            FutureBuilder(
+              future: getUser(),
+              builder: ((context, snapshot) {
+                final e = snapshot.data;
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                }
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return Column(
+                    children: [
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Text(
+                        e!["name"],
+                        style: const TextStyle(fontSize: 30),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Hits ${e["hits"]}",
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                      Text(
+                        "Mistakes ${e["mistakes"]}",
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    ],
+                  );
+                }
+                if (snapshot.hasError) {
+                  print(snapshot.error.toString());
+                  return const Text("an error has occurred");
+                }
+                return Container();
+              }),
+            )
+          ],
+        ),
       )),
     );
   }

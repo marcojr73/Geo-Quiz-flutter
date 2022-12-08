@@ -42,7 +42,7 @@ class _RankingState extends State<Ranking> {
               "The best Players of day",
               style: TextStyle(fontSize: 25),
             ),
-            data.length == 0
+            data.isEmpty
                 ? Column(
                     children: [
                       SizedBox(

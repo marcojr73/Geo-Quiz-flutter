@@ -42,7 +42,7 @@ class _ProfileState extends State<Profile> {
                 "assets/images/profile.jpeg",
               ),
             ),
-            data.length == 0
+            data.isEmpty
                 ? Column(
                     children: [
                       SizedBox(

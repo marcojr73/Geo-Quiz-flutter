@@ -43,7 +43,14 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             data.length == 0
-                ? const CircularProgressIndicator()
+                ? Column(
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.06,
+                      ),
+                      const CircularProgressIndicator(),
+                    ],
+                  )
                 : Column(
                     children: [
                       const SizedBox(

@@ -43,7 +43,14 @@ class _RankingState extends State<Ranking> {
               style: TextStyle(fontSize: 25),
             ),
             data.length == 0
-                ? const CircularProgressIndicator()
+                ? Column(
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.06,
+                      ),
+                      const CircularProgressIndicator(),
+                    ],
+                  )
                 : SingleChildScrollView(
                     child: SizedBox(
                       width: MediaQuery.of(context).size.height * 1,

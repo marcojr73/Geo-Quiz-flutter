@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geo_quiz_mobile/api/playerApi.dart';
 import 'package:geo_quiz_mobile/models/RankingModel.dart';
+import 'package:geo_quiz_mobile/utils/showError.dart';
 
 class Ranking extends StatefulWidget {
   const Ranking({super.key});
@@ -10,14 +11,22 @@ class Ranking extends StatefulWidget {
 }
 
 class _RankingState extends State<Ranking> {
-  Future <List<dynamic>> getRanking() async {
-    final data = await getRankingApi();
-    List<dynamic> rank = data["weekScore"];
-    return rank;
+  List<dynamic> data = [];
+
+  Future getRanking(context) async {
+    final response = await getRankingApi();
+    if (response == 500) {
+      showError(context, "there was an error loading");
+      return;
+    }
+    setState(() {
+      data = response["weekScore"];
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    getRanking(context);
     return Container(
       padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
       color: Theme.of(context).colorScheme.secondary,
@@ -33,21 +42,16 @@ class _RankingState extends State<Ranking> {
               "The best Players of day",
               style: TextStyle(fontSize: 25),
             ),
-            FutureBuilder(
-              future: getRanking(),
-              builder: ((context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                }
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return SingleChildScrollView(
+            data.length == 0
+                ? const CircularProgressIndicator()
+                : SingleChildScrollView(
                     child: SizedBox(
                       width: MediaQuery.of(context).size.height * 1,
                       height: MediaQuery.of(context).size.height * 0.5,
                       child: ListView.builder(
-                          itemCount: snapshot.data!.length,
+                          itemCount: data.length,
                           itemBuilder: ((context, index) {
-                            final e = snapshot.data![index];
+                            final e = data[index];
                             return Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -65,18 +69,29 @@ class _RankingState extends State<Ranking> {
                                 ]);
                           })),
                     ),
-                  );
-                }
-                if (snapshot.hasError) {
-                  print(snapshot.error.toString());
-                  return const CircularProgressIndicator();
-                }
-                return Container();
-              }),
-            )
+                  )
           ],
         ),
       ),
     );
   }
 }
+
+
+
+// FutureBuilder(
+//               future: getRanking(context),
+//               builder: ((context, snapshot) {
+//                 if (snapshot.connectionState == ConnectionState.waiting) {
+//                   return const CircularProgressIndicator();
+//                 }
+//                 if (snapshot.connectionState == ConnectionState.done) {
+//                   return 
+//                 }
+//                 if (snapshot.hasError) {
+//                   print(snapshot.error.toString());
+//                   return const CircularProgressIndicator();
+//                 }
+//                 return Container();
+//               }),
+//             )

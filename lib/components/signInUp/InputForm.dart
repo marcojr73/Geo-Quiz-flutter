@@ -14,7 +14,8 @@ class InputForm extends StatelessWidget {
       child: TextFormField(
         decoration: InputDecoration(labelText: text),
         textInputAction: TextInputAction.next,
-        onSaved: (password) => formData[type] = password ?? "",
+        obscureText: type == "password" ? true : false,
+        onSaved: (e) => formData[type] = e ?? "",
       ),
     );
   }

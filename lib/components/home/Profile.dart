@@ -1,18 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:geo_quiz_mobile/api/playerApi.dart';
+import 'package:geo_quiz_mobile/utils/showError.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    Future<Map<String, dynamic>> getUser() async {
-      final data = await getRankingApi();
-      Map<String, dynamic> user = data["user"];
-      print(user);
-      return user;
-    }
+  State<Profile> createState() => _ProfileState();
+}
 
+class _ProfileState extends State<Profile> {
+  Map<String, dynamic> data = {};
+
+  Future getUser(context) async {
+    final response = await getRankingApi();
+    if (response == 500) {
+      showError(context, "there was an error loading");
+      return;
+    }
+    setState(() {
+      data = response["user"];
+    });
+
+    Map<String, dynamic> user = response["user"];
+    print(user);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    getUser(context);
     return Container(
       color: Theme.of(context).colorScheme.secondary,
       child: Center(
@@ -26,44 +42,30 @@ class Profile extends StatelessWidget {
                 "assets/images/profile.jpeg",
               ),
             ),
-            FutureBuilder(
-              future: getUser(),
-              builder: ((context, snapshot) {
-                final e = snapshot.data;
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                }
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return Column(
+            data.length == 0
+                ? const CircularProgressIndicator()
+                : Column(
                     children: [
                       const SizedBox(
                         height: 30,
                       ),
                       Text(
-                        e!["name"],
+                        data["name"],
                         style: const TextStyle(fontSize: 30),
                       ),
                       const SizedBox(
                         height: 10,
                       ),
                       Text(
-                        "Hits ${e["hits"]}",
+                        "Hits ${data["hits"]}",
                         style: const TextStyle(fontSize: 20),
                       ),
                       Text(
-                        "Mistakes ${e["mistakes"]}",
+                        "Mistakes ${data["mistakes"]}",
                         style: const TextStyle(fontSize: 20),
                       ),
                     ],
-                  );
-                }
-                if (snapshot.hasError) {
-                  print(snapshot.error.toString());
-                  return const Text("an error has occurred");
-                }
-                return Container();
-              }),
-            )
+                  )
           ],
         ),
       )),

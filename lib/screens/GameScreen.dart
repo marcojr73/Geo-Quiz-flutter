@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geo_quiz_mobile/api/quizApi.dart';
 import 'package:geo_quiz_mobile/components/quiz/Questions.dart';
 import 'package:geo_quiz_mobile/components/quiz/question.dart';
+import 'package:geo_quiz_mobile/utils/showError.dart';
 
 class GameScreen extends StatefulWidget {
   final String type;
@@ -43,8 +44,9 @@ class _GameScreenState extends State<GameScreen> {
                     ); 
                   }
                   if (snapshot.hasError) {
-                    print(snapshot.error.toString());
-                    return const CircularProgressIndicator();
+                    return const Center(
+                      child: CircularProgressIndicator()
+                    ); 
                   }
                   if (snapshot.connectionState == ConnectionState.done) {
                     final e = snapshot.data;

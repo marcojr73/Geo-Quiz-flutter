@@ -33,6 +33,8 @@ class _QuestionState extends State<Question> {
         color: Theme.of(context).colorScheme.secondary,
         width: MediaQuery.of(context).size.width * 1,
         child: Column(children: [
+          widget.type == "territories" ? const SizedBox()
+          :
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.1,
           ),
@@ -43,6 +45,8 @@ class _QuestionState extends State<Question> {
           Text(widget.name, style: const TextStyle(fontSize: 50))
           :
           Image.network(widget.name, width: 300,),
+          widget.type == "territories" ? const SizedBox()
+          :
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.1,
           ),

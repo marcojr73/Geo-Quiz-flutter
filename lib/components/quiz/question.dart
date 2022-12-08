@@ -33,7 +33,7 @@ class _QuestionState extends State<Question> {
         color: Theme.of(context).colorScheme.secondary,
         width: MediaQuery.of(context).size.width * 1,
         child: Column(children: [
-          widget.type == "territories" ? const SizedBox()
+          widget.type == "territories" ? SizedBox(height: MediaQuery.of(context).size.height * 0.03,)
           :
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.1,

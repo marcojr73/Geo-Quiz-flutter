@@ -17,7 +17,7 @@ Aos 5 anos de idade Magnus Carlsen memorizou a superfície, população e as cap
 <img width=225 src="assets/images/habilitarfontesdesconhecidas.jpg"/>
 
 - [instale meu apk aqui](https://drive.google.com/file/d/1dwillQH9LY5sHw77KzUc9we5yST8db5H/view?usp=share_link)
-- [veja meu repositório web dessa aplicação aqui](https://github.com/marcojr73/projeto22-geoQuiz-API)
+- [veja meu repositório web dessa aplicação aqui](https://github.com/marcojr73/projeto22-geoQuiz)
 - [veja meu repositório back end dessa aplicação aqui](https://github.com/marcojr73/projeto22-geoQuiz-API)
 
 ***

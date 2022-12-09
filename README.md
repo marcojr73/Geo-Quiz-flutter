@@ -12,10 +12,12 @@ Aos 5 anos de idade Magnus Carlsen memorizou a superfície, população e as cap
 - *Ok, Ok, Entendi, mas como faço para compreender todas as informações se não mando bem em geografia?*
 - Não tema! para isso surgiu o GeoQuiz, um site onde você pode testar e praticar seus conhecimentos sobre o tema, será que você consegue chegar ao top #1 do nosso placar diário?
 - No total foram 60 territórios, 164 capitais de países e 247 bandeiras cadastradas no banco de dados
+- Habilite a opção instalar apps de fontes desconhecidas em seu smartphone
+
+<img width=225 src="assets/images/habilitarfontesdesconhecidas.jpg"/>
 
 - [instale meu apk aqui](https://drive.google.com/file/d/1dwillQH9LY5sHw77KzUc9we5yST8db5H/view?usp=share_link)
 - [veja meu repositório web dessa aplicação aqui](https://github.com/marcojr73/projeto22-geoQuiz-API)
-<img width=225 src="assets/images/habilitarfontesdesconhecidas.jpg"/>
 - [veja meu repositório back end dessa aplicação aqui](https://github.com/marcojr73/projeto22-geoQuiz-API)
 
 ***
